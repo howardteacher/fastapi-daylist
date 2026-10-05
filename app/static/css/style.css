@@ -1,0 +1,130 @@
+/* 共用字體與底色；互動重點色統一使用綠色。 */
+:root {
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", "Noto Sans TC", sans-serif;
+  color: #252b28;
+  background: #f7f7f5;
+  font-synthesis: none;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; min-height: 100vh; }
+button, input { font: inherit; }
+button { cursor: pointer; }
+button:disabled { opacity: .6; cursor: wait; }
+[hidden] { display: none !important; }
+:focus-visible { outline: 2px solid #23734d; outline-offset: 2px; }
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+}
+
+/* 頂部導覽及頁面寬度：桌面版維持工具介面的資訊密度。 */
+.page-shell { max-width: 1160px; margin: 0 auto; padding: 0 32px; }
+.topbar {
+  display: flex; align-items: center; justify-content: space-between;
+  height: 60px; border-bottom: 1px solid #e5e7e4;
+}
+.brand { color: #242a26; font-size: 18px; font-weight: 700; letter-spacing: -.03em; text-decoration: none; }
+.today-date { color: #6b7470; font-size: 13px; }
+.account { display: flex; align-items: center; gap: 14px; font-size: 13px; }
+.account button, .switch-button { border: 0; background: transparent; color: #23734d; }
+.auth-panel { width: min(400px, calc(100% - 32px)); margin: 12vh auto; padding: 30px; background: #fff; border: 1px solid #e1e5e0; border-radius: 8px; }
+.auth-panel h1 { margin: 28px 0 22px; }
+.auth-form { display: grid; gap: 10px; }
+.auth-form input { height: 42px; padding: 0 12px; border: 1px solid #d9ded9; border-radius: 7px; }
+.auth-form button { margin-top: 12px; height: 42px; border: 0; border-radius: 7px; background: #23734d; color: white; }
+.switch-button { margin-top: 20px; padding: 0; }
+
+/* 標題、完成統計與新增任務表單放在頁面上方。 */
+.content { padding: 34px 0 64px; }
+.workspace-header { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin-bottom: 24px; }
+h1 { margin: 0; font-size: 26px; font-weight: 700; letter-spacing: -.035em; line-height: 1.4; }
+.progress { font-size: 14px; color: #68726d; white-space: nowrap; }
+
+.add-form { display: flex; gap: 10px; }
+.add-form input {
+  width: 100%; min-width: 0; height: 42px; padding: 0 13px;
+  background: #fff; border: 1px solid #d9ded9; border-radius: 7px;
+  color: #252b28; font-size: 14px;
+}
+.add-form input::placeholder { color: #8c9590; }
+.add-form input:focus { border-color: #23734d; outline: 2px solid #23734d25; outline-offset: 0; }
+.add-form button {
+  flex: 0 0 auto; height: 42px; padding: 0 17px; border: 1px solid #23734d;
+  border-radius: 7px; background: #23734d; color: #fff; font-size: 14px; font-weight: 600;
+}
+.add-form button:hover:not(:disabled) { background: #195c3b; border-color: #195c3b; }
+.message { margin-top: 12px; padding: 10px 12px; border: 1px solid #edc7c3; border-radius: 6px; background: #fff8f7; color: #9b3c35; font-size: 13px; }
+
+/* 篩選使用底線標示目前分頁，不增加額外的大型按鈕容器。 */
+.list-toolbar {
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  margin-top: 26px; border-bottom: 1px solid #dfe3df;
+}
+.filters { display: flex; gap: 22px; }
+.filter {
+  position: relative; min-height: 39px; padding: 0 2px; border: 0;
+  background: transparent; color: #68726d; font-size: 14px;
+}
+.filter:hover, .filter.active { color: #23734d; }
+.filter.active { font-weight: 600; }
+.filter.active::after { content: ""; position: absolute; right: 0; bottom: -1px; left: 0; height: 2px; background: #23734d; }
+.remaining { color: #747d77; font-size: 13px; white-space: nowrap; }
+
+/* 任務列表共用單一外框；每列以細邊線區隔。 */
+.list-container { margin-top: 12px; background: #fff; border: 1px solid #e1e5e0; border-radius: 8px; overflow: hidden; }
+.todo-list { margin: 0; padding: 0; list-style: none; }
+.todo-item {
+  display: flex; align-items: center; gap: 12px; min-height: 56px;
+  padding: 8px 16px; border-bottom: 1px solid #edf0ec;
+}
+.todo-item:last-child { border-bottom: 0; }
+.todo-item:hover, .todo-item:focus-within { background: #fafbf9; }
+.toggle {
+  display: grid; place-items: center; flex: 0 0 18px; width: 18px; height: 18px; padding: 0;
+  border: 1.5px solid #a2ada5; border-radius: 5px; background: #fff; color: #fff; font-size: 12px; line-height: 1;
+}
+.toggle:hover { border-color: #23734d; }
+.todo-item.done .toggle { border-color: #23734d; background: #23734d; }
+.todo-title { flex: 1; min-width: 0; color: #303733; font-size: 14px; line-height: 1.5; overflow-wrap: anywhere; }
+.todo-item.done .todo-title { color: #858e88; text-decoration: line-through; }
+.todo-actions { display: flex; gap: 4px; margin-left: auto; }
+.icon-button {
+  padding: 6px 8px; border: 0; border-radius: 6px; background: transparent;
+  color: #58635c; font-size: 13px; white-space: nowrap;
+}
+.icon-button:hover { background: #eef2ee; color: #23734d; }
+.icon-button.danger:hover { background: #f8eeee; color: #a83b35; }
+.edit-input {
+  flex: 1; min-width: 0; height: 34px; padding: 0 9px; border: 1px solid #23734d;
+  border-radius: 6px; background: #fff; color: #252b28; font-size: 14px;
+}
+.empty-state { padding: 34px 18px; text-align: center; }
+.empty-state h2 { margin: 0 0 6px; font-size: 15px; font-weight: 600; }
+.empty-state p { margin: 0; color: #727c75; font-size: 13px; }
+
+@media (hover: hover) and (pointer: fine) {
+  /* 滑鼠裝置平常收起次要操作；鍵盤聚焦時仍需讓按鈕可見。 */
+  .todo-item:not(:hover):not(:focus-within) .todo-actions { opacity: 0; }
+}
+
+@media (max-width: 640px) {
+  /* 手機減少左右留白；觸控裝置不套用上方隱藏按鈕的規則。 */
+  .page-shell { padding: 0 16px; }
+  .topbar { height: 56px; }
+  .today-date { font-size: 12px; }
+  .account { gap: 8px; }
+  .content { padding-top: 24px; }
+  .workspace-header { margin-bottom: 18px; }
+  h1 { font-size: 24px; }
+  .progress { font-size: 12px; }
+  .add-form { gap: 8px; }
+  .add-form button { padding: 0 12px; }
+  .list-toolbar { margin-top: 18px; }
+  .filters { gap: 14px; }
+  .filter { font-size: 13px; }
+  .remaining { font-size: 12px; }
+  .todo-item { padding: 8px 11px; gap: 10px; }
+  .icon-button { padding: 7px 5px; font-size: 12px; }
+}

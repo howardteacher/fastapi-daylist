@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f7f7f5">
+    <title>我的任務 · daylist</title>
+    <link rel="stylesheet" href="{{ url_for('static', path='/css/style.css') }}">
+    <script src="{{ url_for('static', path='/js/app.js') }}" defer></script>
+    <meta name="csrf-token" content="{{ csrf }}">
+  </head>
+  <body>
+    <div class="page-shell">
+      <!-- 上方只放產品名稱與日期，避免干擾主要任務操作。 -->
+      <header class="topbar">
+        <a class="brand" href="/" aria-label="daylist 首頁">daylist</a>
+        <div class="account"><span>{{ username }}</span><button id="logout-button" type="button">登出</button><time id="today-date" class="today-date"></time></div>
+      </header>
+
+      <main class="content">
+        <section class="workspace" aria-labelledby="page-title">
+          <!-- 完成統計、剩餘件數由 app.js 依目前任務資料更新。 -->
+          <div class="workspace-header">
+            <h1 id="page-title">我的任務</h1>
+            <span class="progress" id="progress-text" aria-live="polite">載入中…</span>
+          </div>
+
+          <!-- 表單提交由 JavaScript 呼叫 POST /todos/，不會重新載入頁面。 -->
+          <form id="add-form" class="add-form">
+            <label class="sr-only" for="new-title">新增任務名稱</label>
+            <input id="new-title" name="title" type="text" maxlength="255" placeholder="新增任務…" autocomplete="off" required>
+            <button type="submit" id="add-button">新增任務</button>
+          </form>
+
+          <!-- 請求失敗或輸入錯誤時顯示訊息；平常保持隱藏。 -->
+          <div id="message" class="message" role="alert" hidden></div>
+
+          <!-- 篩選只影響目前畫面，原始任務仍保存在瀏覽器記憶體中。 -->
+          <div class="list-toolbar">
+            <div class="filters" role="group" aria-label="篩選任務">
+              <button type="button" class="filter active" data-filter="all" aria-pressed="true">全部</button>
+              <button type="button" class="filter" data-filter="active" aria-pressed="false">待完成</button>
+              <button type="button" class="filter" data-filter="completed" aria-pressed="false">已完成</button>
+            </div>
+            <span class="remaining" id="remaining-count"></span>
+          </div>
+
+          <!-- 任務列由 app.js 產生，避免將使用者輸入當成 HTML 插入。 -->
+          <div class="list-container">
+            <ul id="todo-list" class="todo-list" aria-label="任務"></ul>
+            <div id="empty-state" class="empty-state" hidden>
+              <h2 id="empty-title">還沒有任務</h2>
+              <p id="empty-description">在上方輸入任務名稱，開始建立清單。</p>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>

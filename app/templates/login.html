@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>登入 · daylist</title>
+    <link rel="stylesheet" href="{{ url_for('static', path='/css/style.css') }}">
+    <meta name="csrf-token" content="{{ csrf }}">
+    <script src="{{ url_for('static', path='/js/login.js') }}" defer></script>
+  </head>
+  <body>
+    <main class="auth-panel">
+      <a class="brand" href="/">daylist</a>
+      <h1 id="auth-title">登入帳號</h1>
+      <form id="auth-form" class="auth-form">
+        <label for="username">帳號</label>
+        <input id="username" autocomplete="username" pattern="[A-Za-z0-9_]{3,50}" minlength="3" maxlength="50" required>
+        <label for="password">密碼</label>
+        <input id="password" type="password" autocomplete="current-password" minlength="8" maxlength="128" required>
+        <div id="message" class="message" role="alert" hidden></div>
+        <button id="submit-button" type="submit">登入</button>
+      </form>
+      <button id="switch-button" class="switch-button" type="button">還沒有帳號？註冊</button>
+    </main>
+  </body>
+</html>
